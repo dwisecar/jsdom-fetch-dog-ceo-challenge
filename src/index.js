@@ -1,23 +1,21 @@
-console.log('%c HI', 'color: firebrick')
+fetchDogInfo();
+addEventListeners();
 
-const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
-const breedUrl = 'https://dog.ceo/api/breeds/list/all'
 let dogBreeds;
 let dogUl = document.getElementById("dog-breeds")
 
 function fetchDogInfo() {
-    fetch(imgUrl)
+    fetch('https://dog.ceo/api/breeds/image/random/4')
     .then(res => res.json())
     .then(dogImages => loadDogImages(dogImages) );
 
-    fetch(breedUrl)
+    fetch('https://dog.ceo/api/breeds/list/all')
     .then(res => res.json())
     .then((json) => {
         loadDogBreeds(json);  
         dogBreeds = json;
     });
 }
-
 
 function loadDogImages(dogImages) {
     let dogDiv = document.getElementById("dog-image-container");
@@ -67,14 +65,9 @@ function changeColorOnClick(dogLi) {
     })
 }
 
-let sortInput = document.getElementById("breed-dropdown");
-sortInput.addEventListener("change", function(e){
-    loadDogBreeds(dogBreeds, e.target.value)
-})
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    fetchDogInfo();
-  });
+function addEventListeners() {
+    let sortInput = document.getElementById("breed-dropdown");
+    sortInput.addEventListener("change", function(e){
+        loadDogBreeds(dogBreeds, e.target.value)
+    })
+}   
